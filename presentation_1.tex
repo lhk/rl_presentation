@@ -111,10 +111,10 @@ RWTH \\ % Your institution for the title page
 \titlepage % Print the title page as the first slide
 \end{frame}
 
-\begin{frame}
-\frametitle{Overview} % Table of contents slide, comment this block out to remove it
-\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
-\end{frame}
+%\begin{frame}
+%\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+%\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+%\end{frame}
 
 %----------------------------------------------------------------------------------------
 %	PRESENTATION SLIDES
@@ -209,11 +209,12 @@ The reinforcement agent needs to discover viable strategies while exploring the 
 \frametitle{Definitions}
 An interaction with the environment: \(S_t, a_t, r_t \rightarrow S_{t+1}\) :
 \begin{itemize}
-\item \(s_t \in S\) state (partial observation) at time t
-\item \(a_t \in A\) action taken at time t
-\item \(r_t\) reward received at time t
+\item \(s_t \in S\) \textbf{state} (partial observation) at time t
+\item \(a_t \in A\) \textbf{action} taken at time t
+\item \(r_t\) \textbf{reward} received at time t
 \item \(s_{t+1}\) state (partial observation) at time t+1
-\item \(a_t \sim \pi(s_t) = P(a \in A | s_t \in S)\), actions are drawn from a distribution over the action space A, conditioned on the current state.
+\item \(a_t \sim \pi(s_t) = P(a \in A | s_t \in S)\), actions are drawn from a distribution over the action space A, conditioned on the current state.\\
+this is called the \textbf{policy}
 \end{itemize}
 \bigskip
 The reward \(r_t\) obtained at time t, as well as the next state \(s_{t+1}\) depend on the action \(a_t\) sampled from \(\pi\).
@@ -227,9 +228,9 @@ All interactions with the environment are based on a policy. We derive the follo
 Defined as total expected future reward.\\
 A discount factor \(\mu\) is introduced to avoid infinite values.\\
 The recursion stops at terminal states with a fixed value of 0.
-\item \(Q(s, a) = E_{\pi, s_t = s, a_t= a} (v(s))\), analogous to value, \\
+\item \(Q(s, a) = E_{\pi, s_t = s, a_t= a} (v(s))\), \textbf{Q-values} are analogous to values, \\
 but action at time t is already given
-\item \(A(s, a) = Q(s, a) - v(s)\), advantage of choosing action a at state s.
+\item \(A(s, a) = Q(s, a) - v(s)\), \textbf{advantage} of choosing action a at state s.
 \end{itemize}
 \end{frame}
 
@@ -238,9 +239,9 @@ but action at time t is already given
 The goal is to maximize the total expected future reward:
 \begin{itemize}
 \item \(\pi^\star\) is the ideal policy. \\
-\hspace{0.5cm} \textrightarrow  \hspace{0.5cm} \(a_t \sim \pi^\star(s_t)\). 
+\hspace{0.3cm} \textrightarrow  \hspace{0.3cm} \(a_t \sim \pi^\star(s_t)\). 
 \item \(Q^\star(a, s)\) are the Q-values associated with the ideal policy.\\
-\hspace{0.5cm} \textrightarrow  \hspace{0.5cm} \(a_t = argmax_a Q^\star(s_t, a)\)
+\hspace{0.3cm} \textrightarrow  \hspace{0.3cm} \(a_t = argmax_a Q^\star(s_t, a)\)
 \item \(A^\star(a, s)\) are the advantages associated with the ideal policy. \\
 Please note: \(A^\star <= 0\)
 \end{itemize}
@@ -249,8 +250,8 @@ Please note: \(A^\star <= 0\)
 For continous action spaces:
 \begin{itemize}
 \item \(\pi\) is a probability distribution, it translates nicely to the sampling of continous instead of discrete actions.
-\item acting according to the Q values becomes problematic: Q can be very non-smooth and the evaluation is expensive.\\
-\hspace{0.5cm} \textrightarrow  \hspace{0.5cm} the argmax becomes a complex optimization problem.
+\item acting according to the Q values becomes problematic:\\
+\hspace{0.3cm} \textrightarrow  \hspace{0.3cm} the argmax becomes a complex optimization problem.
 \end{itemize}
 \end{frame}
 
@@ -276,7 +277,7 @@ If we collect enough such estimates, we can approximate the true advantage funct
 \frametitle{Learning with policy gradients part 2}
 Positive advantage = action is better than current policy,\\
 negative advantage = action is worse\\
-\hspace{0.5cm} \textrightarrow  \hspace{0.5cm} change the probability according to our advantage estimation.\\
+\hspace{0.3cm} \textrightarrow  \hspace{0.3cm} change the probability according to our advantage estimation.\\
 \bigskip
 In a machine learning setup:
 \begin{itemize}
