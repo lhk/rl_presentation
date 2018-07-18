@@ -80,6 +80,16 @@
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 \usepackage{movie15}
 \usepackage{textcomp}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\urlstyle{same}
+
+%\usepackage{quotchap}
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -141,7 +151,7 @@ Instead we will focus on
 \begin{frame}
 \frametitle{Intro to Machine Learning}
 \begin{figure}
-\includegraphics[height=0.8\textheight]{ml_slide.png}
+\includegraphics[height=0.7\textheight]{ml_slide.png}
 \end{figure}
 \end{frame}
 
@@ -185,7 +195,7 @@ The reinforcement agent needs to discover viable strategies while exploring the 
 \begin{frame}
 \frametitle{A typical RL agent}
 \begin{figure}
-\includegraphics[width=0.9\textwidth]{rat_cartoon.jpg}
+\includegraphics[width=0.8\textwidth]{rat_cartoon.jpg}
 \end{figure}
 \end{frame}
 
@@ -264,11 +274,18 @@ If we collect enough such estimates, we can approximate the true advantage funct
 
 \begin{frame}
 \frametitle{Learning with policy gradients part 2}
-Positive advantage = action is better than current policy, negative advantage = action is worse\\
-\hspace{0.5cm} \textrightarrow  \hspace{0.5cm} we change the probability according to our advantage estimation.\\
+Positive advantage = action is better than current policy,\\
+negative advantage = action is worse\\
+\hspace{0.5cm} \textrightarrow  \hspace{0.5cm} change the probability according to our advantage estimation.\\
 \bigskip
-Back to machine learning: \(\pi(s) = \pi_\theta(s)\), is a function approximator with parameters \(\theta\). \\
-This can be updated with gradient descent, which brings us to the central formula:
+In a machine learning setup:
+\begin{itemize}
+    \item updates become training steps
+    \item \(\pi(s) = \pi_\theta(s)\), \\
+        function approximator with parameters \(\theta\).
+    \item estimate training gradients on empirical data:
+\end{itemize}
+\bigskip
 \begin{large}
 \[\hat{g}= \hat{E}(\nabla_\theta (log(\pi_\theta(a_0, s_0)) \: \hat{A}(a_0, s_0)\]
 \end{large}
@@ -280,10 +297,26 @@ In practice this leads to the following setup:
 \begin{enumerate}
 \item initialize random policy and random value prediction
 \item interact with simulation and collect (lots of) observations
-\item use observations to calculate empirical estimates
+\item use observations to calculate empirical estimates,\\
+      (advantages for each action)
 \item train on empirical estimates \textrightarrow \hspace{0.2cm} update policy and value estimates
 \item back to step 2.
 \end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Learning with policy gradients part 4}
+Basically, we are repeating two steps:
+\begin{itemize}
+    \item use $\pi$ to get the value function $ v = v^\pi$
+    \item update the policy with the value function $\pi := greedy(v)$
+\end{itemize}
+\bigskip
+This is supposed to guarantee convergence. \\
+At least that's what they say \href{http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/DP.pdf}{here}.\\
+\bigskip
+In practice, things look different ...
 \end{frame}
 
 \begin{frame}
@@ -317,6 +350,16 @@ After reimplementing the algorithm and searching for better function approximato
 
 \begin{frame}
 \Huge{\centerline{Questions ?}}
+\vspace{\fill}
+\begin{footnotesize}
+    Sources for the graphics (click me):
+    \begin{itemize}
+        \item \href{http://www.sharelatex.com}{venn diagram on reinforcement learning}
+        \item \href{http://www2.smumn.edu/facpages/~dbucknam/}{rat comic}
+        \item the others are homemade
+    \end{itemize}
+\end{footnotesize}
+
 \end{frame}
 
 %----------------------------------------------------------------------------------------
