@@ -165,7 +165,7 @@ You are given only data. The goal is to find structure within this data. Typical
 
 \begin{block}{Supervised}
 You are given pairs of  \((input, output)\). The goal is to learn a good prediction of outputs for new inputs.
-This is further divided into \textbf{Regression} \(predicting continuous outputs\) and \textbf{Classification} \(predicting discrete outputs\).
+This is further divided into \textbf{Regression} (predicting continuous outputs) and \textbf{Classification} (predicting discrete outputs).
 \end{block}
 
 \begin{block}{Reinforcement learning}
@@ -263,11 +263,11 @@ Policy gradient methods predict:
 \item value \(v(s)\)
 \end{itemize}
 The value function is necessary for training the agent. \\
-We use it to calculate an estimation of the advantage. \\
+We use it to calculate an estimation of the advantage (\href{https://arxiv.org/abs/1506.02438}{GAE}). \\
 All notation here assumes empirical observations of rewards and states:
 \begin{align*}
 \delta_t &= -v(s_t) + r_t + \gamma  v(s_{t+1}) \\
-\hat{A}(s_0 &=s, a_0 =0) = \sum_{t=0}^{\inf} \delta_t (\mu \gamma) ^t
+\hat{A}(s_0 &=s, a_0 =a) = \sum_{t=0}^{\inf} \delta_t (\mu \gamma) ^t
 \end{align*}
 If we collect enough such estimates, we can approximate the true advantage function (which was defined as an expectation).\\
 \textbf{Please note}: we assume a given initial action.
@@ -288,7 +288,7 @@ In a machine learning setup:
 \end{itemize}
 \bigskip
 \begin{large}
-\[\hat{g}= \hat{E}(\nabla_\theta (log(\pi_\theta(a_0, s_0)) \: \hat{A}(a_0, s_0)\]
+\[\hat{g}= \hat{E}(\nabla_\theta (log(\pi_\theta(a_0, s_0)) \: \hat{A}(a_0, s_0))\]
 \end{large}
 \end{frame}
 
